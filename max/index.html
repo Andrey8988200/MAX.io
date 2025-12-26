@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Friends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #7a52b3, #4a80d8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2, h3 {
+            font-size: 2em;
+        }
+
+        #login-container, #chat-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        #login-form input, #chat-input, #friend-search-input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #6d42a6;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5b3686;
+        }
+
+        #profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        #messages {
+            margin-top: 20px;
+        }
+
+        #messages .message {
+            background-color: #444;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        #friend-search {
+            margin-top: 20px;
+        }
+
+        #friend-search input {
+            width: 60%;
+        }
+
+        #send-btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Registration/Login Section -->
+    <div id="login-container">
+        <h2>Welcome to Chat with Friends!</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Enter username" required><br>
+            <input type="password" id="password" placeholder="Enter password" required><br>
+            <button type="submit">Log In</button>
+            <p>Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+        </form>
+    </div>
+
+    <!-- Chat and Profile Page -->
+    <div id="chat-container" style="display: none;">
+        <div id="profile">
+            <img id="avatar" src="" alt="Avatar" />
+            <h3 id="username-display">User</h3>
+        </div>
+        <div id="chat-box">
+            <input type="text" id="chat-input" placeholder="Type a message..." />
+            <button id="send-btn">Send</button>
+        </div>
+        <div id="friend-search">
+            <input type="text" id="friend-search-input" placeholder="Search for friends" />
+            <button id="search-btn">Search</button>
+        </div>
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        // Login Form Submission
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username && password) {
+                // For now, we assume successful login
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("chat-container").style.display = "block";
+                
+                // Set the username in the profile
+                document.getElementById("username-display").textContent = username;
+                // Set a placeholder avatar for the user (replace with actual avatar if available)
+                document.getElementById("avatar").src = "https://via.placeholder.com/80";
+            }
+        });
+
+        // Send Chat Message
+        document.getElementById("send-btn").addEventListener("click", function() {
+            const message = document.getElementById("chat-input").value;
+            if (message) {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add("message");
+                messageDiv.textContent = message;
+                document.getElementById("messages").appendChild(messageDiv);
+                document.getElementById("chat-input").value = ""; // Clear input
+            }
+        });
+
+        // Search for Friend
+        document.getElementById("search-btn").addEventListener("click", function() {
+            const searchQuery = document.getElementById("friend-search-input").value;
+            alert("Searching for: " + searchQuery); // Implement actual search functionality here
+        });
+    </script>
+
+</body>
+</html>
